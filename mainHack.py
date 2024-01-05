@@ -521,29 +521,38 @@ def main(sessionName, trialName, trial_id, camerasToUse=['all'],
         with open(pathSettings, 'w') as file:
             yaml.dump(settings, file)
 
+import glob
 if __name__ == '__main__':
-    main(
-        sessionName='FT026g-2021-09-14-09-47-58',
-        trialName='trial',         
-        trial_id='trial',   #I don't know what is this. but it must be the same as trialName.
-        camerasToUse=['all'],
-        intrinsicsFinalFolder=None,
-        isDocker=False,
-        extrinsicsTrial=False,
-        alternateExtrinsics=None,
-        calibrationOptions=None,
-        markerDataFolderNameSuffix=None,
-        imageUpsampleFactor=1,
-        poseDetector='OpenPose',
-        resolutionPoseDetection='default',
-        scaleModel=False,
-        bbox_thr=0.8,
-        augmenter_model='v0.3',
-        genericFolderNames=False,
-        offset=False,        #do not add vertical offset.
-        benchmark=False,
-        dataDir='C:\openCapTestSet',    #where do we keep all the data
-        overwriteAugmenterModel=False        
-    )
+    allPaths=glob.glob('C:\\openCapTestSet\\Data\\*\\sessionMetadata.yaml')
+    for aPath in allPaths:
+        sessionName=aPath.split('\\')[-2]       #'FT026g-2021-09-14-09-47-58'    
+        targetOutputFilePath=r'C:\openCapTestSet\Data\{}\MarkerData\OpenPose_default\PostAugmentation_v0.3\trial_LSTM.trc'.format(sessionName)
+        if not os.path.exists(targetOutputFilePath):
+            print(sessionName)
+            main(
+                sessionName=sessionName,
+                trialName='trial',         
+                trial_id='trial',   #I don't know what is this. but it must be the same as trialName.
+                camerasToUse=['all'],
+                intrinsicsFinalFolder=None,
+                isDocker=False,
+                extrinsicsTrial=False,
+                alternateExtrinsics=None,
+                calibrationOptions=None,
+                markerDataFolderNameSuffix=None,
+                imageUpsampleFactor=1,
+                poseDetector='OpenPose',
+                resolutionPoseDetection='default',
+                scaleModel=False,
+                bbox_thr=0.8,
+                augmenter_model='v0.3',
+                genericFolderNames=False,
+                offset=False,        #do not add vertical offset.
+                benchmark=False,
+                dataDir='C:\openCapTestSet',    #where do we keep all the data
+                overwriteAugmenterModel=False        
+            )
+        else:
+            print(sessionName,'[skip]')
 
-    #after running, the output will be in C:\openCapTestSet\Data\FT026g-2021-09-14-09-47-58\MarkerData\OpenPose_default\PostAugmentation_v0.3\trial_LSTM.trc
+#after running, the output will be in C:\openCapTestSet\Data\FT026g-2021-09-14-09-47-58\MarkerData\OpenPose_default\PostAugmentation_v0.3\trial_LSTM.trc

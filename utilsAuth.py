@@ -11,7 +11,7 @@ import maskpass
 import os
 from utilsAPI import getAPIURL
 
-API_URL = getAPIURL()
+API_URL = None # getAPIURL()
 
 #%% Get token 
 def getToken(saveEnvPath=None):

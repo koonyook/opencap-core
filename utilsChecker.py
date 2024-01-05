@@ -28,8 +28,8 @@ from utilsAPI import getAPIURL
 
 from utilsAuth import getToken
 
-API_TOKEN = getToken()
-API_URL = getAPIURL()
+API_TOKEN = None    # getToken()
+API_URL = None  # getAPIURL()
 
 # %%
 def download_file(url, file_name):
@@ -1088,6 +1088,7 @@ def synchronizeVideoKeypoints(keypointList, confidenceList,
     for iCam,vertVel in enumerate(vertVelList):
         timeVecs.append(np.arange(keypointList[iCam].shape[1]))
         if iCam>0:
+            '''
             # if no keypoints in Cam0 or the camera of interest, do not use cross_corr to sync.
             if np.max(np.abs(vertVelList[iCam])) == 0 or np.max(np.abs(vertVelList[0])) == 0:
                 lag = 0
@@ -1118,6 +1119,8 @@ def synchronizeVideoKeypoints(keypointList, confidenceList,
             if np.abs(lag) > maxShiftSteps: # if this fails and we get a lag greater than maxShiftSteps (units=timesteps)
                 lag = 0 
                 print('Did not use cross correlation to sync {} - computed shift was greater than specified {} frames. Shift set to 0.'.format(c_cameras2Use[iCam], maxShiftSteps))
+            '''
+            lag=0
             shiftVals.append(lag)
             timeVecs[iCam] = timeVecs[iCam] - shiftVals[iCam]
         tStartEndVec[iCam,:] = [timeVecs[iCam][0], timeVecs[iCam][-1]]

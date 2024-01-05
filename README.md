@@ -26,9 +26,12 @@ These instructions are for Windows 10. The pipeline also runs on Ubuntu. Minimum
 5. Install OpenSim: `conda install -c opensim-org opensim=4.4=py39np120`. Visit this [webpage](https://simtk-confluence.stanford.edu:8443/display/OpenSim/Conda+Package) for more details about the OpenSim conda package. 
 6. Install Visual Studio Community 2022 from [here](https://visualstudio.microsoft.com/vs/community/). During installation, select "Desktop development with C++". 
 7. For GPU support of tensorflow, install the [NVIDIA driver](https://www.nvidia.com/download/index.aspx?lang=en-us) for your GPU. Then in the anaconda prompt, install CUDA and cudnn: `conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0`. [More information about setting up GPU support for tensorflow](https://www.tensorflow.org/install/pip).
+Don't need to install tensorflow in this step. tensorflow will be installed from the requirement.
 8. Install other dependencies. Make sure you have navigated to the local directory where the repository is cloned, then: `python -m pip install -r requirements.txt`.
+Check if tensorflow can see GPU.
+`python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"`
 9. Copy ffmpeg and openpose builds found in this [Google Drive dependencies folder](https://drive.google.com/drive/folders/17ihUjaKsc8vwzOuzKWIMndNz_Z7Odm4N?usp=sharing) to the C drive: put them into `C:\ffmpeg` and `C:\openpose` such that the binary folders are `C:\ffmpeg\bin` and `C:\openpose\bin`. The up-to-date versions can also be used ([OpenPose](https://github.com/CMU-Perceptual-Computing-Lab/openpose/releases), [ffmpeg](https://www.gyan.dev/ffmpeg/builds/)), but we recommend the provided versions from the Google Drive folder, since they have been tested with the pipeline.
-10. Add ffmpeg to the PATH Environment Variable: press Windows key, type environment variables, click Environment Variables. In System variables, click Path, and add `C:\ffmpeg\bin`. 
+10. Add ffmpeg to the PATH Environment Variable: press Windows key, type environment variables, click Environment Variables. In System variables, click Path, and add `C:\ffmpeg\bin` and `C:\openpose`. 
 
 ### Running the pipeline using data collected at app.opencap.ai
 

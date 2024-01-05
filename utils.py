@@ -20,8 +20,8 @@ from scipy import signal
 from utilsAuth import getToken
 from utilsAPI import getAPIURL
 
-API_URL = getAPIURL()
-API_TOKEN = getToken()
+API_URL = None # getAPIURL()
+API_TOKEN = None # getToken()
 
 #%% Rest of utils
 

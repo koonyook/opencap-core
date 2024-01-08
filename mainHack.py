@@ -524,6 +524,7 @@ def main(sessionName, trialName, trial_id, camerasToUse=['all'],
 import glob
 if __name__ == '__main__':
     allPaths=glob.glob('C:\\openCapTestSet\\Data\\*\\sessionMetadata.yaml')
+    #allPaths=allPaths[:1]
     for aPath in allPaths:
         sessionName=aPath.split('\\')[-2]       #'FT026g-2021-09-14-09-47-58'    
         targetOutputFilePath=r'C:\openCapTestSet\Data\{}\MarkerData\OpenPose_default\PostAugmentation_v0.3\trial_LSTM.trc'.format(sessionName)

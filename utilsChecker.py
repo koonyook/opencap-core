@@ -1041,7 +1041,8 @@ def synchronizeVideoKeypoints(keypointList, confidenceList,
     # trial to be considered a gait trial.
     
     # Detect activity, which determines sync function that gets used
-    isGait = detectGaitAllVideos(mkrSpeedList,allMarkerList,confSyncList,markers4Ankles,sampleFreq)
+    '''
+    isGait = detectGaitAllVideos(mkrSpeedList,allMarkerList,confSyncList,markers4Ankles,sampleFreq)     #error spotted deep into this function
     
     isHandPunch,handForPunch = detectHandPunchAllVideos(handPunchVertPositionList,sampleFreq)
     if isHandPunch:
@@ -1050,7 +1051,10 @@ def synchronizeVideoKeypoints(keypointList, confidenceList,
         syncActivity = 'gait'
     else:
         syncActivity = 'general'
-        
+    '''
+    isGait=False
+    syncActivity='general'
+
     print('Using ' + syncActivity + ' sync function.')
     
     
@@ -1316,7 +1320,7 @@ def detectFeetMoving(allMarkers,confidence,ankleInds,motionThreshold=.5):
             # need to find the two points that are furthest from each other. A naive
             # search is O(n^2). Let's assume we are looking for motion in horizontal 
             # direction.
-            idxMax = np.argmax(confidentMarkers[:,0])
+            idxMax = np.argmax(confidentMarkers[:,0])       #ValueError: attempt to get argmax of an empty sequence
             idxMin = np.argmin(confidentMarkers[:,0])
             maxMvt.append(scipy.linalg.norm(
                 confidentMarkers[idxMax,:]-confidentMarkers[idxMin,:]))

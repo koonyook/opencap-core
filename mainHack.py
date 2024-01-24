@@ -523,11 +523,13 @@ def main(sessionName, trialName, trial_id, camerasToUse=['all'],
 
 import glob
 if __name__ == '__main__':
-    allPaths=glob.glob('C:\\openCapTestSet\\Data\\*\\sessionMetadata.yaml')
+    root='C:\openCapGp' #or 'C:\openCapTestSet'
+    topData=root+'\\Data\\'
+    allPaths=glob.glob(topData+'*\\sessionMetadata.yaml')
     #allPaths=allPaths[:1]
     for aPath in allPaths:
         sessionName=aPath.split('\\')[-2]       #'FT026g-2021-09-14-09-47-58'    
-        targetOutputFilePath=r'C:\openCapTestSet\Data\{}\MarkerData\OpenPose_default\PostAugmentation_v0.3\trial_LSTM.trc'.format(sessionName)
+        targetOutputFilePath=topData+r'{}\MarkerData\OpenPose_default\PostAugmentation_v0.3\trial_LSTM.trc'.format(sessionName)
         if not os.path.exists(targetOutputFilePath):
             print(sessionName)
             main(
@@ -550,7 +552,7 @@ if __name__ == '__main__':
                 genericFolderNames=False,
                 offset=False,        #do not add vertical offset.
                 benchmark=False,
-                dataDir='C:\openCapTestSet',    #where do we keep all the data
+                dataDir=root,    #where do we keep all the data
                 overwriteAugmenterModel=False        
             )
         else:
